@@ -3,7 +3,6 @@ import  requests
 from keys import APP_ACCESS_TOKEN
 BASE_URL = 'https://api.instagram.com/v1/'
 
-
 #function to get user id
 def get_user_id(insta_username):
 
@@ -18,6 +17,8 @@ def get_user_id(insta_username):
     else:
         print 'Status code other than 200 received!'
 
+
+#function to find out buyer's persona to make better marketing strategy
 def get_user_persona(insta_username):
     user_id = get_user_id(insta_username)
     if user_id == None:
@@ -32,6 +33,7 @@ def get_user_persona(insta_username):
             for x in range(0,len(user_media['data'])):
                 for y in range(0,len(user_media['data'][x]['tags'])):
 
+                    #finding user's intrest by counting hash tags
                     if user_media['data'][x]['tags'][y] in hash_items:
                         hash_items[user_media['data'][x]['tags'][y]]+=1
                     else:
@@ -43,6 +45,7 @@ def get_user_persona(insta_username):
     else:
         print "Status code other than 200 received!"
     print hash_items
+    #mechanism for plotting
     pylab.figure(1)
     x = range(len(hash_items))
     pylab.xticks(x, hash_items.keys())
