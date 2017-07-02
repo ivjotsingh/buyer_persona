@@ -43,6 +43,12 @@ def get_user_persona(insta_username):
     else:
         print "Status code other than 200 received!"
     print hash_items
+    pylab.figure(1)
+    x = range(len(hash_items))
+    pylab.xticks(x, hash_items.keys())
+    pylab.plot(x, hash_items.values(), "g")
+
+    pylab.show()
 
 
 get_user_persona('iv_jot')
